@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Traits\Observer\ModelObserverTrait;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\Auth\LoginEventSubscriber;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -9,6 +10,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
+    use ModelObserverTrait;
+
     /**
      * The event to listener mappings for the application.
      *
@@ -25,7 +28,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // observe models events
+        $this->observeModels();
     }
 
     /**
