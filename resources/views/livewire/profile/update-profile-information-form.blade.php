@@ -6,14 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
-use function Livewire\Volt\{state, rules, mount};
-
-//state([
-////    'name' => fn () => auth()->user()->name,
-////    'email' => fn () => auth()->user()->email,
-//    'user' => fn () => auth()->user()->load('profile'),
-////    'profile' => fn () => auth()->user()->profile,
-//]);
+use function Livewire\Volt\rules;
 
 $user = auth()->user()->load('profile');
 
@@ -35,7 +28,6 @@ $updateProfileInformation = function () {
         $user->email_verified_at = null;
     }
 
-//    $this->profile->save();
     $user->save();
 
     $this->dispatch('profile-updated', name: $user->name);
